@@ -50,7 +50,7 @@ const Navbar = () => {
 
   return (
     <section className='absolute top-0 w-full  bg-[#2B354C] bg-opacity-40 text-white' >
-      <div className="navbar max-w-6xl mx-auto py-3 ">
+      <div className="navbar max-w-6xl mx-auto md:py-3 ">
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
