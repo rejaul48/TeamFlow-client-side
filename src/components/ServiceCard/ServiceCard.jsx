@@ -28,7 +28,7 @@ console.log(Icon)
                     <h2 className='text-lg font-semibold col-span-10'>{serviceName}</h2>
                 </div>
                 <p className='text-[16px] my-2'>{truncateText(`${serviceDescription}`, 15)}</p>
-                <Link className='hover:underline hover:text-blue-500'>Learn more...</Link>
+                <Link className='hover:underline hover:text-[#D1F8EF]'>Learn more...</Link>
             </div>
         </>
     );

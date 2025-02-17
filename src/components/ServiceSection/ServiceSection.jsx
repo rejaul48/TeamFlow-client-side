@@ -17,8 +17,8 @@ import { SiInductiveautomation } from "react-icons/si";
 const ServiceSection = () => {
 
     const textWhite = "#ffffff"
-    const bgColor = "#16A34A"
-    const bgColor2 = "#FFF5EA"
+    const bgColor = "#578FCA"
+    const bgColor2 = "#A1E3F9"
     const colorDark = "#000000"
 
     return (
