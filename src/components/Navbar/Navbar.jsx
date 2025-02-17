@@ -1,6 +1,6 @@
 
 import React, { useContext, useState } from 'react';
-import { Link, NavLink, useNavigate } from 'react-router-dom';
+import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { TeamFlowContext } from '../../ContextApi/AuthContext';
 import useGetUserByEmail from '../../hooks/useGetUserByEmail';
 import Swal from 'sweetalert2';
@@ -8,6 +8,9 @@ import Swal from 'sweetalert2';
 const Navbar = () => {
   const { user, setUser, userLogOut, currentUser, setCurrentUser } = useContext(TeamFlowContext);
   console.log(currentUser)
+
+  const location = useLocation()
+  
 
   // Fetch user data based on email
   useGetUserByEmail(user?.email);
@@ -42,14 +45,33 @@ const Navbar = () => {
 
   const links = (
     <>
-      <li><NavLink to="/">Home</NavLink></li>
-      <li><NavLink to="/contact-us">Contact Us</NavLink></li>
-      {user && <li><NavLink to="/dashboard">Dashboard</NavLink></li>}
+      <li><NavLink to="/"
+        className={({ isActive }) =>
+          `btn border-transparent text-sm shadow-none rounded-md ${location?.pathname === '/contact-us' ? 'text-black' : 'text-white'} ${isActive
+            ? 'border-b-4 border-b-[#B2A5FF] bg-transparent'
+            : 'bg-transparent border-b-2 border-transparent'
+          } hover:border-b-2 hover:border-b-[#B2A5FF] hover:bg-transparent`
+        }>Home</NavLink></li>
+      <li><NavLink to="/contact-us"
+        className={({ isActive }) =>
+          `btn border-transparent text-sm shadow-none rounded-md ${location?.pathname === '/contact-us' ? 'text-black' : 'text-white'} ${isActive
+            ? 'border-b-4 border-b-[#B2A5FF]   bg-transparent'
+            : 'bg-transparent border-b-2 border-transparent'
+          } hover:border-b-2 hover:border-b-[#B2A5FF] hover:bg-transparent`
+        }>Contact Us</NavLink></li>
+      {user && <li><NavLink to="/dashboard"
+        className={({ isActive }) =>
+          `btn border-transparent text-sm shadow-none rounded-md ${location?.pathname === '/contact-us' ? 'text-black' : 'text-white'} ${isActive
+            ? 'border-b-4 border-b-[#B2A5FF]  bg-transparent'
+            : 'bg-transparent border-b-2 border-transparent'
+          } hover:border-b-2 hover:border-b-[#B2A5FF] hover:bg-transparent`
+        }
+      >Dashboard</NavLink></li>}
     </>
   );
 
   return (
-    <section className='absolute top-0 w-full  bg-[#2B354C] bg-opacity-40 text-white' >
+    <section className={`absolute top-0 w-full  bg-[#2B354C] bg-opacity-40 text-white ${location?.pathname === '/contact-us' ? 'bg-white text-black bg-opacity-100': '' }`} >
       <div className="navbar max-w-6xl mx-auto md:py-3 ">
         <div className="navbar-start">
           <div className="dropdown">
@@ -64,13 +86,13 @@ const Navbar = () => {
               {links}
             </ul>
           </div>
-          <a className="text-2xl md:text-3xl font-bold">TeamFlow</a>
+          <Link to={'/'} className={`text-2xl md:text-3xl font-bold ${location?.pathname === '/contact-us' ? 'text-black' : 'text-white'}`}>TeamFlow</Link>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">{links}</ul>
         </div>
         <div className="navbar-end">
- 
+
           {!user && <Link to="/login" className="btn">Login</Link>}
           <div className="dropdown dropdown-end">
             <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
@@ -78,7 +100,7 @@ const Navbar = () => {
                 <img
                   alt="user image"
                   src={
-                   currentUser? currentUser?.photo : 'https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp'
+                    currentUser ? currentUser?.photo : 'https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp'
                   }
                 />
               </div>
