@@ -5,7 +5,7 @@ const HelpUsSolution = () => {
     return (
         <>
 
-            <section className="relative h-[400px] mt-12 bg-fixed bg-center bg-cover" style={{ backgroundImage: "url('https://i.imgur.com/r17vKwl.jpeg')" }}>
+            <section className="relative h-[400px] mt-24 bg-fixed bg-center bg-cover" style={{ backgroundImage: "url('https://i.imgur.com/r17vKwl.jpeg')" }}>
                 <div className="absolute inset-0 bg-black/50"></div> {/* Dark overlay for readability */}
 
                 <div className="relative z-10 flex flex-col items-center justify-center h-full text-center text-white">

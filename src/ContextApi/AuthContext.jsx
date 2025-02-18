@@ -19,6 +19,23 @@ const TeamFlowProvier = ({ children }) => {
     const axiosPublic = useAxiosPublic()
     // get current user
 
+    // toggle mode
+    const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
+
+    // Function to toggle theme
+    const toggleTheme = () => {
+        const newTheme = theme === 'light' ? 'dark' : 'light';
+        setTheme(newTheme);
+        localStorage.setItem('theme', newTheme); // Persist the theme in localStorage
+    };
+
+    // Apply theme to body element when it changes
+    useEffect(() => {
+        document.body.setAttribute('data-theme', theme);
+    }, [theme]);
+
+    // toggle mode 
+
 
     // new user register with email and password
     const newUserRegister = (email, password) => {
@@ -112,7 +129,10 @@ const TeamFlowProvier = ({ children }) => {
         newUserRegister,
         userLogOut,
         registerUserLogin,
-        loginWithGoole
+        loginWithGoole,
+        theme,
+        setTheme,
+        toggleTheme
     }
 
     return (

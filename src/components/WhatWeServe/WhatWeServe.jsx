@@ -5,9 +5,9 @@ const WhatWeServe = () => {
     return (
         <>
 
-            <section className='my-24 mx-4 xl:mx-0'>
+            <section className='mt-16 mx-4 xl:mx-0'>
 
-                <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6 ">
+                <div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6 ">
 
                     {/* left side */}
                     <div className='grid grid-cols-2 gap-5'>

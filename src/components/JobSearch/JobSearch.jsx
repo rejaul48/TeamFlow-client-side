@@ -9,7 +9,7 @@ const JobSearch = () => {
 
             {/* section content */}
 
-            <div className='max-w-6xl mx-auto px-4 xl:px-0'>
+            <div className='container mx-auto px-4 xl:px-0'>
                 <div className='grid grid-cols-1 lg:grid-cols-2 gap-6'>
                     {/* left side with image */}
                     <div className='h-[340px] md:h-full w-full'>

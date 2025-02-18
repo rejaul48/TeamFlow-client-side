@@ -5,9 +5,9 @@ const HumanResource = () => {
     return (
         <>
 
-            <section className='mt-28 '>
+            <section className='mt-24 '>
                 {/* human resource section head */}
-                <div className='max-w-6xl mx-auto md:flex md:items-center md:gap-5 pb-8 px-4 xl:px-0'>
+                <div className='container mx-auto md:flex md:items-center md:gap-5 pb-8 px-4 xl:px-0'>
                     <div className='md:w-6/12'>
                         <h2 className='tracking-widest border-b-2 w-fit pb-1 md:text-lg uppercase'>end-to-end recruitment</h2>
                         <h2 className='text-xl md:text-3xl lg:text-4xl xl:text-5xl mt-2 font-bold'>We are dedicated to delivering the highest standards of service</h2>
@@ -26,7 +26,7 @@ const HumanResource = () => {
                             backgroundImage: "url(https://i.imgur.com/QVyIpFy.jpeg)",
                         }}>
                         <div className="hero-overlay bg-opacity-60"></div>
-                        <div className="hero-content text-neutral-content max-w-6xl mx-auto py-24">
+                        <div className="hero-content text-neutral-content container mx-auto py-24">
                             <div className="w-full  lg:flex lg:items-center lg:gap-12">
                                 <div className='lg:w-5/12'>
                                     <p className='text-xl md:text-3xl lg:text-lg tracking-widest border-b-[1px] w-fit pb-1'>strategy that aligns with your goals</p>

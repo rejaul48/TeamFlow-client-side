@@ -53,9 +53,9 @@ const ContactUs = () => {
 
             <section className=' p-4 md:p-12 pt-24 md:pt-24'>
 
-                <div className='max-w-6xl mx-auto'>
+                <div className='container mx-auto'>
 
-                    <div className='md:flex md:gap-6 justify-between bg-[#05345C] bg-opacity-70 text-white p-6 md:p-12 rounded-xl'>
+                    <div className='md:flex md:gap-6 justify-between bg-[#3674B5] bg-opacity-80 text-white p-6 md:p-12 rounded-xl'>
 
                         <div className="contact_path ">
                             <p className="text-white">
@@ -135,7 +135,7 @@ const ContactUs = () => {
                                         <div>
 
                                             <button type='submit' className='mt-5 gap-4 text-lg font-semibold uppercase 
-                                             bg-[#0788FF] py-3 w-full rounded-full
+                                             bg-[#3674B5] py-3 w-full rounded-full
                                                  text-white hover:delay-100
                                              hover:bg-black hover:bg-opacity-60  
                                              transition-colors duration-200 

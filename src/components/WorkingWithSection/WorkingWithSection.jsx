@@ -28,12 +28,12 @@ const WorkingWithSection = () => {
     return (
         <>
 
-            <section className='pt-24 pb-12 bg-[#EEEEEE] px-4 xl:px-0'>
+            <section className='py-6 bg-[#D1F8EF] px-4 xl:px-0 mt-16'>
                 {/* working with section head */}
                 <Section_head heading={"Working with the Bests!"} shortHeading={"Our clients consistently report high satisfaction with our services and outcomes."}></Section_head>
 
 
-                <div className='max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-6 gap-5 md:gap-2 items-center pt-5 px-3 xl:px-0'>
+                <div className='container mx-auto grid grid-cols-2 md:grid-cols-6 gap-5 md:gap-2 items-center pt-5 px-3 xl:px-0'>
                     {
                         workingWithImages.map((img, ind) => (
                             <div key={ind} className='flex justify-center items-center md:flex-none'>

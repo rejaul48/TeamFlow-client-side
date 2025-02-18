@@ -82,7 +82,7 @@ const LoginPage = () => {
 
     return (
         <>
-            <section className='max-w-6xl md:min-h-[80vh] mx-auto mt-6 
+            <section className='container md:min-h-[80vh] mx-auto mt-6 
               flex items-center justify-center 
             md:flex md:items-center gap-7 md:px-4
             

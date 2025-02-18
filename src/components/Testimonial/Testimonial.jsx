@@ -39,8 +39,8 @@ const Testimonial = () => {
 
     return (
 
-        <section className="bg-[url('https://i.imgur.com/6Cn0Be2.jpeg')] bg-cover bg-center bg-no-repeat py-6 mt-12">
-            <section className="max-w-6xl mx-auto grid grid-cols-12 gap-6 mt-12 px-4 xl:px-0">
+        <section className="bg-[url('https://i.imgur.com/6Cn0Be2.jpeg')] bg-cover bg-center bg-no-repeat py-6 mt-16">
+            <section className="container mx-auto grid grid-cols-12 gap-6 mt-12 px-4 xl:px-0">
                 {/* Swiper Slider on Left Side */}
                 <div className="col-span-12 md:col-span-8 flex flex-col justify-center overflow-hidden">
                     <Swiper

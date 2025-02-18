@@ -5,9 +5,9 @@ const WhyChooseUs = () => {
     return (
         <>
 
-            <section className='mt-12 mx-4 xl:mx-0'>
+            <section className='mt-24 mx-4 xl:mx-0'>
 
-                <div className='max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8'>
+                <div className='container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8'>
                     {/* left side */}
                     <div className='relative flex items-center justify-center'>
                         <div className='mt-4'>

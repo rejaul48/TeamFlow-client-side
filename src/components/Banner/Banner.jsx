@@ -38,7 +38,7 @@ const Banner = () => {
                                         <h1 className='text-xl md:text-5xl lg:text-6xl text-white font-bold 
                                         
                                         '>Optimize Workforce Efficiency</h1>
-                                        <p className='text-lg text-white mt-2 w-10/12 md:w-full text-center'>Manage employees, track performance, and automate HR tasks effortlessly.</p>
+                                        <p className='text-lg text-white md:mt-2 w-11/12 md:w-full text-center'>Manage employees, track performance, and automate HR tasks effortlessly.</p>
                                         <Link to={'/contact-us'} className='text-white text-lg font-semibold bg-[#578FCA] px-8 py-3 rounded-md animate-bounce mt-4'>Get in Touch</Link>
                                     </div>
                                 </div>
@@ -51,8 +51,8 @@ const Banner = () => {
 
                                 <div className='absolute top-0 left-0 w-full h-full bg-black bg-opacity-25 z-30 '>
                                     <div className='flex flex-col items-center justify-center h-full'>
-                                        <h1 className='text-3xl md:text-5xl lg:text-6xl text-white font-bold'>Empower Your Team</h1>
-                                        <p className='text-lg text-white mt-2  w-10/12 md:w-full text-center'>Enhance productivity with smart employee scheduling and task automation.</p>
+                                        <h1 className='text-xl md:text-5xl lg:text-6xl text-white font-bold'>Empower Your Team</h1>
+                                        <p className='text-lg text-white md:mt-2  w-11/12 md:w-full text-center'>Enhance productivity with smart employee scheduling and task automation.</p>
                                         <Link to={'/contact-us'} className='text-white text-lg font-semibold bg-[#578FCA] px-8 py-3 rounded-md animate-bounce mt-4'>Get in Touch</Link>
                                     </div>
                                 </div>
@@ -63,10 +63,10 @@ const Banner = () => {
                             <SwiperSlide>
                                 <img className='w-full h-[290px] md:h-[440px] object-cover lg:h-[640px]' src="https://i.imgur.com/k0XI8r9.jpeg" alt="slider-image" />
 
-                                <div className='absolute top-0 left-0 w-full h-full bg-black bg-opacity-25 z-30 '>
+                                <div className='absolute top-0 left-0 pt-5 w-full h-full bg-black bg-opacity-25 z-30 '>
                                     <div className='flex flex-col items-center justify-center h-full'>
-                                        <h1 className='text-3xl md:text-5xl lg:text-6xl text-white font-bold'>Smart HR Solutions</h1>
-                                        <p className='text-lg text-white mt-2  w-10/12 md:w-full text-center'>Simplify hiring, onboarding, and performance evaluation—all in one platform.</p>
+                                        <h1 className='text-xl md:text-5xl lg:text-6xl text-white font-bold'>Smart HR Solutions</h1>
+                                        <p className='text-lg text-white md:mt-2   w-11/12 md:w-full text-center'>Simplify hiring, onboarding, and evaluation—all in one platform.</p>
                                         <Link to={'/contact-us'} className='text-white text-lg font-semibold bg-[#578FCA] px-8 py-3 rounded-md animate-bounce mt-4'>Get in Touch</Link>
                                     </div>
                                 </div>
@@ -84,8 +84,8 @@ const Banner = () => {
 
                                 <div className='absolute top-0 left-0 w-full h-full bg-black bg-opacity-25 z-30 '>
                                     <div className='flex flex-col items-center justify-center h-full'>
-                                        <h1 className='text-3xl md:text-5xl lg:text-6xl text-white font-bold'>Manage with Confidence</h1>
-                                        <p className='text-lg text-white mt-2  w-10/12 md:w-full text-center'>Real-time insights, seamless reporting, and secure employee records.</p>
+                                        <h1 className='text-xl md:text-5xl lg:text-6xl text-white font-bold'>Manage with Confidence</h1>
+                                        <p className='text-lg text-white md:mt-2   w-11/12 md:w-full text-center'>Real-time insights, seamless reporting, and secure employee records.</p>
                                         <Link to={'/contact-us'} className='text-white text-lg font-semibold bg-[#578FCA] px-8 py-3 rounded-md animate-bounce mt-4'>Get in Touch</Link>
                                     </div>
                                 </div>

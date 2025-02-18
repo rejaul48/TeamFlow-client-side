@@ -72,7 +72,7 @@ const Dashboard = () => {
             </Helmet>
 
             <div>
-                <main className='2xl:max-w-6xl mx-auto'>
+                <main className='2xl:container mx-auto'>
                     <section className='md:flex gap-3 w-full h-screen'>
                         {/* Menu Section */}
                         <div className='bg-base-200 md:min-h-screen md:w-3/12 lg:w-2/12'>

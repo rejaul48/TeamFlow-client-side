@@ -17,25 +17,25 @@ import { SiInductiveautomation } from "react-icons/si";
 const ServiceSection = () => {
 
     const textWhite = "#ffffff"
-    const bgColor = "#578FCA"
+    const bgColor = "#ffffff"
     const bgColor2 = "#A1E3F9"
     const colorDark = "#000000"
 
     return (
         <>
 
-            <section className='mt-12 md:mt-24'>
+            <section className='mt-12 md:mt-16'>
                 {/* section head */}
                 <div>
                     <Section_head heading={"Our Services"} shortHeading={"Find your services from us"}></Section_head>
                 </div>
 
-                <div className='max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 
+                <div className='container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 
                 px-4 xl:px-0
                 '>
                     <ServiceCard
                         Icon={MdDesignServices}
-                        textColor={textWhite}
+                        textColor={colorDark}
                         bgColor={bgColor}
                         serviceName={'Custom Software Development'}
                         serviceDescription={'Build tailored software solutions to meet specific business needs. Services include web applications, desktop software, and custom tools.'}
@@ -53,7 +53,7 @@ const ServiceSection = () => {
 
                     <ServiceCard
                         Icon={IoIosCloud}
-                        textColor={textWhite}
+                        textColor={colorDark}
                         bgColor={bgColor}
                         serviceName={'Cloud Computing Solutions'}
                         serviceDescription={'Provide cloud infrastructure setup, migration, and management services, enabling businesses to operate efficiently and scale easily.'}
@@ -69,7 +69,7 @@ const ServiceSection = () => {
 
                     <ServiceCard
                         Icon={SiTorbrowser}
-                        textColor={textWhite}
+                        textColor={colorDark}
                         bgColor={bgColor}
                         serviceName={'Web Development'}
                         serviceDescription={'Design and develop responsive and scalable websites with modern frameworks to enhance your online presence.'}
@@ -85,7 +85,7 @@ const ServiceSection = () => {
 
                     <ServiceCard
                         Icon={GiArtificialIntelligence}
-                        textColor={textWhite}
+                        textColor={colorDark}
                         bgColor={bgColor}
                         serviceName={'Artificial Intelligence'}
                         serviceDescription={'Implement AI-powered tools, predictive analytics, and machine learning models to automate processes and improve efficiency.'}
@@ -101,7 +101,7 @@ const ServiceSection = () => {
 
                     <ServiceCard
                         Icon={SiInductiveautomation}
-                        textColor={textWhite}
+                        textColor={colorDark}
                         bgColor={bgColor}
                         serviceName={'DevOps and Automation'}
                         serviceDescription={'Implement CI/CD pipelines, cloud automation, and infrastructure as code (IaC) to streamline development and deployment processes.'}
