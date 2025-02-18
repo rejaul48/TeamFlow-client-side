@@ -114,7 +114,7 @@ const Dashboard = () => {
                         <NavLink
                             to={'/dashboard/employee-list'}
                             className={({ isActive }) =>
-                                `p-2 block rounded transition duration-200 ${isActive ? "bg-[#A1E3F9] text-black font-bold" : "text-white hover:bg-[#A1E3F9] hover:text-black"
+                                `p-2 block rounded transition duration-200 w-fit ${isActive ? "bg-[#A1E3F9] text-black font-bold" : "text-white hover:bg-[#A1E3F9] hover:text-black"
                                 }`
                             }
                         >
@@ -125,7 +125,7 @@ const Dashboard = () => {
                         <NavLink
                             to={'/dashboard/progress'}
                             className={({ isActive }) =>
-                                `p-2 block rounded transition duration-200 ${isActive ? "bg-[#A1E3F9] text-black font-bold" : "text-white hover:bg-[#A1E3F9] hover:text-black"
+                                `p-2 block rounded transition duration-200 w-fit ${isActive ? "bg-[#A1E3F9] text-black font-bold" : "text-white hover:bg-[#A1E3F9] hover:text-black"
                                 }`
                             }
                         >
@@ -140,7 +140,7 @@ const Dashboard = () => {
                         <NavLink
                             to={'/dashboard/all-employee-list'}
                             className={({ isActive }) =>
-                                `p-2 block rounded transition duration-200 ${isActive ? "bg-[#A1E3F9] text-black font-bold" : "text-white hover:bg-[#A1E3F9] hover:text-black"
+                                `p-2 block rounded transition duration-200 w-fit ${isActive ? "bg-[#A1E3F9] text-black font-bold" : "text-white hover:bg-[#A1E3F9] hover:text-black"
                                 }`
                             }
                         >
@@ -151,7 +151,7 @@ const Dashboard = () => {
                         <NavLink
                             to={'/dashboard/payroll'}
                             className={({ isActive }) =>
-                                `p-2 block rounded transition duration-200 ${isActive ? "bg-[#A1E3F9] text-black font-bold" : "text-white hover:bg-[#A1E3F9] hover:text-black"
+                                `p-2 block rounded transition duration-200 w-fit ${isActive ? "bg-[#A1E3F9] text-black font-bold" : "text-white hover:bg-[#A1E3F9] hover:text-black"
                                 }`
                             }
                         >
@@ -179,7 +179,7 @@ const Dashboard = () => {
 
                         {/* Outlet Section */}
                         <div className='w-full md:overflow-y-auto pb-12 h-fit md:h-full bg-[#D1F8EF]'>
-                            <section className='bg-[#578FCA] md:max-w-[98%] px-4'>
+                            <section className='bg-[#578FCA]  px-4'>
                                 <div className='flex justify-between items-center py-2 '>
                                     <div className='dropdown dropdown-end space-y-2 text-white'>
                                         <h3 className='text-xl uppercase'>Welcome,</h3>

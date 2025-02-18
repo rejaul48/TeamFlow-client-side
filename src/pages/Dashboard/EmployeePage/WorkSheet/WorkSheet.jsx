@@ -115,7 +115,7 @@ const WorkSheet = () => {
               onChange={() => { }}
               className="input input-bordered mr-2"
             />
-            <button type="submit" className="btn btn-primary px-8">
+            <button type="submit" className="btn bg-[#3674B5] hover:bg-[#3674B5] px-8">
               Add
             </button>
           </form>
@@ -226,7 +226,7 @@ const WorkSheet = () => {
                 />
               </div>
               <div className="modal-action">
-                <button className="btn btn-primary" onClick={handleSave}>
+                <button className="btn bg-[#3674B5] hover:bg-[#3674B5]" onClick={handleSave}>
                   Save
                 </button>
                 <button className="btn btn-ghost" onClick={() => setShowModal(false)}>

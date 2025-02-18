@@ -54,7 +54,7 @@ const PayrollPage = () => {
             <Link
               to={`/dashboard/payment/${row.original._id}`}
               className={`btn ${
-                isPaid ? "btn-disabled bg-gray-300" : "btn-warning bg-yellow-500"
+                isPaid ? "btn-disabled bg-gray-300" : "bg-[#578FCA] hover:bg-[#578FCA]"
               } text-white px-4 py-1 rounded`}
               disabled={isPaid}
             >
@@ -110,10 +110,11 @@ const PayrollPage = () => {
               {...getTableBodyProps()}
               className="divide-y divide-gray-200 text-sm text-gray-600"
             >
-              {rows.map((row) => {
+              {rows.map((row,ind) => {
                 prepareRow(row);
                 return (
                   <tr
+                  key={ind}
                     {...row.getRowProps()}
                     className="hover:bg-gray-50"
                   >

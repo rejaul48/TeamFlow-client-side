@@ -1,6 +1,6 @@
 
-import React, { useState, useEffect } from "react";
-import { useTable } from "react-table";
+import React, { useState } from "react";
+import { useTable, useSortBy } from "react-table"; 
 import useVerifiedEmployees from "../../../../hooks/useVerifiedEmployees";
 import { Link } from "react-router-dom";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
@@ -12,6 +12,7 @@ const AllVerifiedEmployeeList = () => {
   const [adjustSalaryEmployee, setAdjustSalaryEmployee] = useState(null);
   const [newSalary, setNewSalary] = useState(0);
   const [isTableView, setIsTableView] = useState(true);
+  const [sortBy, setSortBy] = useState({ field: null, order: "asc" }); 
 
   const { verifiedEmployee, refetch } = useVerifiedEmployees();
   const axiosSecure = useAxiosSecure();
@@ -26,17 +27,15 @@ const AllVerifiedEmployeeList = () => {
       .catch((err) => console.log(err));
   };
 
-
   const handleSaveSalary = () => {
     const currentSalary = adjustSalaryEmployee?.salary;
-    console.log(currentSalary)
     if (newSalary <= currentSalary) {
       Swal.fire({
         position: "top-center",
         icon: "info",
         title: "Salary can only be increased",
         showConfirmButton: false,
-        timer: 1500
+        timer: 1500,
       });
       return;
     }
@@ -51,7 +50,7 @@ const AllVerifiedEmployeeList = () => {
 
   const handleChengeUserRole = (id, currentRole) => {
     const newRole = { role: currentRole === "HR" ? "Employee" : "HR" };
-    const action = { role: currentRole === "HR" ? "Employee" : 'HR' };
+    const action = { role: currentRole === "HR" ? "Employee" : "HR" };
 
     Swal.fire({
       title: "Are you sure?",
@@ -60,10 +59,9 @@ const AllVerifiedEmployeeList = () => {
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: `YES Make ${action.role}`
+      confirmButtonText: `YES Make ${action.role}`,
     }).then((result) => {
       if (result.isConfirmed) {
-
         axiosSecure
           .patch(`/update-user-role/${id}`, newRole)
           .then(() => {
@@ -74,18 +72,15 @@ const AllVerifiedEmployeeList = () => {
         Swal.fire({
           title: `Now ${action.role}`,
           text: `Successfully make to ${action.role}`,
-          icon: "success"
+          icon: "success",
         });
       }
     });
-
-
-
   };
 
   const handleFiredEmployee = (id, firedStatus) => {
     const fireStatus = { isFired: firedStatus === true ? false : true };
-    const action = { isFired: firedStatus === true ? "Remove from Fired" : 'Fired' };
+    const action = { isFired: firedStatus === true ? "Remove from Fired" : "Fired" };
 
     Swal.fire({
       title: "Are you sure?",
@@ -94,14 +89,12 @@ const AllVerifiedEmployeeList = () => {
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: `YES ${action.isFired}`
+      confirmButtonText: `YES ${action.isFired}`,
     }).then((result) => {
       if (result.isConfirmed) {
-
         axiosSecure
           .patch(`/chenge-fired-status/${id}`, fireStatus)
           .then(() => {
-
             refetch();
           })
           .catch((err) => console.log(err));
@@ -109,16 +102,29 @@ const AllVerifiedEmployeeList = () => {
         Swal.fire({
           title: `${action.isFired}`,
           text: `successfully ${action.isFired}`,
-          icon: "success"
+          icon: "success",
         });
       }
     });
-
-
   };
 
+  // Sorting logic
+  const sortedData = React.useMemo(() => {
+    if (!sortBy.field) return verifiedEmployee || [];
 
-  const data = React.useMemo(() => verifiedEmployee || [], [verifiedEmployee]);
+    return [...verifiedEmployee].sort((a, b) => {
+      if (sortBy.field === "salary") {
+        return sortBy.order === "asc" ? a.salary - b.salary : b.salary - a.salary;
+      } else if (sortBy.field === "role") {
+        return sortBy.order === "asc"
+          ? a.role.localeCompare(b.role)
+          : b.role.localeCompare(a.role);
+      }
+      return 0;
+    });
+  }, [verifiedEmployee, sortBy]);
+
+  const data = React.useMemo(() => sortedData || [], [sortedData]);
 
   const columns = React.useMemo(
     () => [
@@ -155,7 +161,7 @@ const AllVerifiedEmployeeList = () => {
         accessor: "adjustSalary",
         Cell: ({ row }) => (
           <button
-            className="btn btn-warning text-sm"
+            className="btn bg-[#578FCA] hover:bg-[#578FCA] text-sm"
             onClick={() => {
               handleAdjustSalary(row.original.email);
             }}
@@ -179,8 +185,8 @@ const AllVerifiedEmployeeList = () => {
             {row.original.role === "admin"
               ? "Admin"
               : row.original.isFired
-                ? <p className="text-red-500">Fired</p>
-                : "Fire"}
+              ? <p className="text-red-500">Fired</p>
+              : "Fire"}
           </button>
         ),
       },
@@ -189,7 +195,7 @@ const AllVerifiedEmployeeList = () => {
         accessor: "makeHR",
         Cell: ({ row }) => (
           <button
-            className="btn btn-primary"
+            className="btn bg-[#A1E3F9] hover:bg-[#A1E3F9]"
             onClick={() =>
               row.original.role !== "admin" &&
               handleChengeUserRole(row.original._id, row.original.role)
@@ -199,8 +205,8 @@ const AllVerifiedEmployeeList = () => {
             {row.original.role === "admin"
               ? "Admin"
               : row.original.role === "HR"
-                ? "Make Employee"
-                : "Make HR"}
+              ? "Make Employee"
+              : "Make HR"}
           </button>
         ),
       },
@@ -210,7 +216,7 @@ const AllVerifiedEmployeeList = () => {
         Cell: ({ row }) => (
           <Link
             to={`/dashboard/employee-details/${row.original.email}`}
-            className="btn btn-info"
+            className="btn bg-[#3674B5] hover:bg-[#3674B5]"
             disabled={row.original.isFired}
           >
             View Details
@@ -221,26 +227,53 @@ const AllVerifiedEmployeeList = () => {
     []
   );
 
-  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
-    useTable({ columns, data });
+  const {
+    getTableProps,
+    getTableBodyProps,
+    headerGroups,
+    rows,
+    prepareRow,
+  } = useTable({ columns, data }, useSortBy); // Add useSortBy here
 
   return (
     <>
-
-      <Helmet >
+      <Helmet>
         <title>TemFlow | All Verified Employees Page</title>
       </Helmet>
-
 
       <div className="p-4">
         <h1 className="text-2xl font-semibold mb-4">Verified Employee List</h1>
 
         {/* Toggle View Button */}
         <button
-          className="btn bg-emerald-800 text-white hover:bg-emerald-900 mb-4"
+          className="btn bg-[#578FCA] text-white hover:bg-emerald-900 mb-4"
           onClick={() => setIsTableView((prev) => !prev)}
         >
           {isTableView ? "Switch to Card View" : "Switch to Table View"}
+        </button>
+
+        {/* Sorting Buttons */}
+        <button
+          className="btn bg-[#578FCA] text-white hover:bg-[#578FCA] mb-4 mr-2"
+          onClick={() =>
+            setSortBy({
+              field: "salary",
+              order: sortBy.order === "asc" ? "desc" : "asc",
+            })
+          }
+        >
+          Sort by Salary {sortBy.field === "salary" ? (sortBy.order === "asc" ? "🔼" : "🔽") : ""}
+        </button>
+        <button
+          className="btn bg-[#578FCA] text-white hover:bg-[#578FCA] mb-4"
+          onClick={() =>
+            setSortBy({
+              field: "role",
+              order: sortBy.order === "asc" ? "desc" : "asc",
+            })
+          }
+        >
+          Sort by Role {sortBy.field === "role" ? (sortBy.order === "asc" ? "🔼" : "🔽") : ""}
         </button>
 
         {/* Conditional Rendering */}
@@ -256,7 +289,9 @@ const AllVerifiedEmployeeList = () => {
                   return (
                     <tr key={key} {...restProps}>
                       {headerGroup.headers.map((column) => {
-                        const { key, ...restColumnProps } = column.getHeaderProps();
+                        const { key, ...restColumnProps } = column.getHeaderProps(
+                          column.getSortByToggleProps() // Add sorting toggle props
+                        );
                         return (
                           <th
                             key={key}
@@ -264,6 +299,14 @@ const AllVerifiedEmployeeList = () => {
                             className="border border-gray-200 p-2 bg-gray-100 sticky top-0 z-10"
                           >
                             {column.render("Header")}
+                            {/* Add sorting indicator */}
+                            <span>
+                              {column.isSorted
+                                ? column.isSortedDesc
+                                  ? " 🔽"
+                                  : " 🔼"
+                                : ""}
+                            </span>
                           </th>
                         );
                       })}
@@ -296,7 +339,7 @@ const AllVerifiedEmployeeList = () => {
             </table>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4  ">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {data.map((employee) => (
               <div key={employee._id} className="card border p-4">
                 <h2 className="text-lg font-semibold">{employee.name}</h2>
@@ -305,15 +348,13 @@ const AllVerifiedEmployeeList = () => {
                 <p>Salary: {employee.salary}</p>
                 <div className="mt-4 flex gap-2">
                   <button
-                    className="btn btn-warning"
+                    className="btn bg-[#3674B5] hover:bg-[#3674B5]"
                     onClick={() => handleAdjustSalary(employee.email)}
                   >
                     Adjust Salary
                   </button>
-
-                  {/* Make HR Button */}
                   <button
-                    className="btn btn-primary"
+                    className="btn bg-[#A1E3F9] hover:bg-[#A1E3F9]"
                     onClick={() =>
                       employee.role !== "admin" &&
                       handleChengeUserRole(employee._id, employee.role)
@@ -321,17 +362,13 @@ const AllVerifiedEmployeeList = () => {
                     disabled={employee.role === "admin"}
                   >
                     {employee.role === "admin"
-                      ? "Admin" // Text to display if role is admin
+                      ? "Admin"
                       : employee.role === "HR"
-                        ? "Make Employee"
-                        : "Make HR"}
+                      ? "Make Employee"
+                      : "Make HR"}
                   </button>
-
-
                 </div>
-
                 <div className="mt-4 flex gap-2">
-                  {/* Fire Button */}
                   <button
                     className="btn btn-danger"
                     onClick={() =>
@@ -341,24 +378,18 @@ const AllVerifiedEmployeeList = () => {
                     disabled={employee.role === "admin"}
                   >
                     {employee.role === "admin"
-                      ? "Admin" // Text to display if role is admin
+                      ? "Admin"
                       : employee.isFired
-                        ? <p className="text-red-500">Fired</p>
-                        : "Fire"}
+                      ? <p className="text-red-500">Fired</p>
+                      : "Fire"}
                   </button>
-
-                  {/* view detals button */}
                   <Link
                     to={`/dashboard/employee-details/${employee.email}`}
-                    className="btn btn-info"
+                    className="btn bg-[#3674B5] hover:bg-[#3674B5]"
                   >
                     View Details
                   </Link>
-
-
                 </div>
-
-
               </div>
             ))}
           </div>
@@ -397,13 +428,13 @@ const AllVerifiedEmployeeList = () => {
             </div>
             <div className="flex gap-4 w-full">
               <button
-                className="btn btn-primary w-fit"
+                className="btn bg-[#A1E3F9] hover:bg-[#A1E3F9] w-fit"
                 onClick={() => handleSaveSalary()}
               >
                 Save Changes
               </button>
               <button
-                className="btn btn-secondary w-fit"
+                className="btn bg-[#3674B5] hover:bg-[#3674B5] w-fit"
                 onClick={() => setIsModalOpen(false)}
               >
                 Cancel

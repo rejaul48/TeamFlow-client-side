@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import "react-datepicker/dist/react-datepicker.css";
 import { useTable } from 'react-table';
@@ -13,30 +12,38 @@ const EmployeeList = () => {
   const [selectedEmployee, setSelectedEmployee] = useState(null);
   const [paymentMonth, setPaymentMonth] = useState('');
   const [paymentYear, setPaymentYear] = useState('');
+  const [sortOption, setSortOption] = useState("name");
   const { allEmployee, refetch } = useAllEmployeeList();
   const axiosSecure = useAxiosSecure();
 
   console.log(allEmployee)
-  // Handle toggle verified status
+
   const handleMakeVerified = (id, currentVerifiedStatus) => {
     const newVerifiedStatus = !currentVerifiedStatus;
-
-    // Update the original data in the database
     axiosSecure.patch(`/user-verified/${id}`, { verified: newVerifiedStatus })
       .then(() => {
-        // Manually update the local state of allEmployee
-        allEmployee.map(employee =>
-          employee._id === id ? { ...employee, verified: newVerifiedStatus } : employee
-        );
-        // Optionally refetch data from the server to ensure consistency
         refetch();
       })
       .catch(err => console.log('Error updating verification:', err));
   };
 
+  const sortedData = React.useMemo(() => {
+    if (!allEmployee) return [];
+    return [...allEmployee].sort((a, b) => {
+      if (a.salary <= 0 && b.salary > 0) return 1;
+      if (b.salary <= 0 && a.salary > 0) return -1;
+      if (sortOption === "name") {
+        return a.name.localeCompare(b.name);
+      } else if (sortOption === "salary") {
+        return a.salary - b.salary;
+      } else if (sortOption === "verified") {
+        return a.verified === b.verified ? 0 : a.verified ? -1 : 1;
+      }
+      return 0;
+    });
+  }, [allEmployee, sortOption]);
 
-
-  const data = React.useMemo(() => allEmployee, [allEmployee]);
+  const data = React.useMemo(() => sortedData, [sortedData]);
 
   const columns = React.useMemo(
     () => [
@@ -74,9 +81,9 @@ const EmployeeList = () => {
         accessor: "pay",
         Cell: ({ row }) => (
           <button
-            className="btn btn-sm btn-primary"
+            className="btn btn-sm bg-[#A1E3F9] hover:bg-[#A1E3F9]"
             onClick={() => handlePay(row.original)}
-            disabled={!row.original.verified} // Disable if already paid
+            disabled={!row.original.verified}  
           >
             Pay
           </button>
@@ -88,9 +95,8 @@ const EmployeeList = () => {
         Cell: ({ row }) =>
           <Link
             disabled={!row.original.verified || row.original.isFired}
-            to={`/dashboard/employee-details/${row?.original?.email}`} className="btn btn-sm btn-info">
+            to={`/dashboard/employee-details/${row?.original?.email}`} className="btn btn-sm bg-[#3674B5] hover:bg-[#3674B5]">
             Details
-
           </Link>,
       },
     ],
@@ -98,7 +104,6 @@ const EmployeeList = () => {
   );
 
   const tableInstance = useTable({ columns, data });
-
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = tableInstance;
 
   const handlePay = (employee) => {
@@ -106,7 +111,6 @@ const EmployeeList = () => {
     setShowModal(true);
   };
 
-  // Handle pay button click
   const handleEmployeePay = () => {
     const paymentEmployee = {
       name: selectedEmployee?.name,
@@ -120,7 +124,6 @@ const EmployeeList = () => {
       paymentDate: ''
     };
 
-    // Send data into the database collection
     axiosSecure.post('/payroll', paymentEmployee, { withCredentials: true })
       .then(() => {
         Swal.fire({
@@ -131,14 +134,6 @@ const EmployeeList = () => {
           timer: 1500
         });
 
-        // Mark the payment as requested
-        const updatedEmployee = { ...selectedEmployee, paymentRequested: true };
-        setSelectedEmployee(updatedEmployee);
-        // Update the employee data locally
-        const updatedEmployees = allEmployee.map(emp =>
-          emp._id === selectedEmployee._id ? updatedEmployee : emp
-        );
-        // Optionally refetch data from the server to ensure consistency
         refetch();
         setShowModal(false);
       })
@@ -147,8 +142,6 @@ const EmployeeList = () => {
       });
   };
 
-
-  // Determine if the Pay button should be disabled
   const isPayButtonDisabled = !paymentMonth || !paymentYear;
 
   return (
@@ -159,7 +152,17 @@ const EmployeeList = () => {
 
       <div className="p-4">
         <h2 className="text-2xl font-bold mb-4">Employee List</h2>
-
+        <div className="mb-4 flex gap-4">
+          <select
+            className="select select-bordered w-40"
+            value={sortOption}
+            onChange={(e) => setSortOption(e.target.value)}
+          >
+            <option value="name">Sort by Name</option>
+            <option value="salary">Sort by Salary</option>
+            <option value="verified">Sort by Verified</option>
+          </select>
+        </div>
         <div className="w-full max-h-[540px] overflow-x-auto overflow-y-auto">
           <table {...getTableProps()} className="table table-zebra  ">
             <thead>
@@ -186,48 +189,6 @@ const EmployeeList = () => {
             </tbody>
           </table>
         </div>
-
-        {showModal && selectedEmployee && (
-          <div className="modal modal-open">
-            <div className="modal-box">
-              <h3 className="font-bold text-lg">Pay {selectedEmployee.name}</h3>
-              <div className="mt-4">
-                <p className="mb-2">
-                  <strong>Salary:</strong> ${selectedEmployee.salary}
-                </p>
-                <input
-                  type="text"
-                  onChange={(e) => setPaymentMonth(e.target.value)}
-                  placeholder="Month"
-                  className="input input-bordered w-full mb-2"
-                  required
-                />
-                <input
-                  type="text"
-                  onChange={(e) => setPaymentYear(e.target.value)}
-                  placeholder="Year"
-                  className="input input-bordered w-full mb-2"
-                  required
-                />
-              </div>
-              <div className="modal-action">
-                <button
-                  onClick={() => { handleEmployeePay() }}
-                  className="btn btn-primary"
-                  disabled={isPayButtonDisabled}  // Disable if either field is empty
-                >
-                  Pay
-                </button>
-                <button
-                  className="btn btn-ghost"
-                  onClick={() => setShowModal(false)}
-                >
-                  Close
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
       </div>
     </>
   );
