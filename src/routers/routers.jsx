@@ -17,6 +17,9 @@ import useAxiosSecure from "../hooks/useAxiosSecure";
 import PaymentPage from "../pages/Dashboard/AdminPage/PaymentPage/PaymentPage";
 import UnAuthorize from "../pages/ErrorPage/UnAuthorize";
 import PrivetRoute from "./PrivetRoute";
+import OverviewPage from "../pages/Dashboard/OverviewPage/OverviewPage";
+import ProfilePage from "../pages/profilePage/profilePage";
+import AboutUs from "../pages/AboutUs/AboutUs";
 
 
 const axiosSecure = useAxiosSecure()
@@ -34,6 +37,10 @@ const routers = createBrowserRouter([
             {
                 path: '/contact-us',
                 element: <ContactUs ></ContactUs>
+            },
+            {
+                path: '/about-us',
+                element: <AboutUs ></AboutUs>
             }
         ]
     },
@@ -43,6 +50,13 @@ const routers = createBrowserRouter([
         errorElement: <ErrorPage ></ErrorPage>,
         children: [
 
+            {
+                path: 'overview',
+                element: <OverviewPage></OverviewPage>
+            }, {
+                path: 'profile',
+                element: <ProfilePage ></ProfilePage>
+            },
             // those are employee route
             {
                 path: 'work-sheet',

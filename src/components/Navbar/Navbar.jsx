@@ -53,6 +53,13 @@ const Navbar = () => {
             : 'bg-transparent border-b-2 border-transparent'
           } hover:border-b-2 hover:border-b-[#3674B5] hover:bg-transparent`
         }>Home</NavLink></li>
+      <li><NavLink to="/about-us"
+        className={({ isActive }) =>
+          `btn border-transparent text-sm shadow-none rounded-md ${location?.pathname === '/contact-us' ? 'text-black' : 'text-white'} ${isActive
+            ? 'border-b-4 border-b-[#3674B5] bg-transparent'
+            : 'bg-transparent border-b-2 border-transparent'
+          } hover:border-b-2 hover:border-b-[#3674B5] hover:bg-transparent`
+        }>About Us</NavLink></li>
       <li><NavLink to="/contact-us"
         className={({ isActive }) =>
           `btn border-transparent text-sm shadow-none rounded-md ${location?.pathname === '/contact-us' ? 'text-black' : 'text-white'} ${isActive
