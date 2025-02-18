@@ -1,6 +1,4 @@
-
 import React, { useState } from "react";
-import { useTable, useSortBy } from "react-table"; 
 import useVerifiedEmployees from "../../../../hooks/useVerifiedEmployees";
 import { Link } from "react-router-dom";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
@@ -12,7 +10,6 @@ const AllVerifiedEmployeeList = () => {
   const [adjustSalaryEmployee, setAdjustSalaryEmployee] = useState(null);
   const [newSalary, setNewSalary] = useState(0);
   const [isTableView, setIsTableView] = useState(true);
-  const [sortBy, setSortBy] = useState({ field: null, order: "asc" }); 
 
   const { verifiedEmployee, refetch } = useVerifiedEmployees();
   const axiosSecure = useAxiosSecure();
@@ -108,23 +105,7 @@ const AllVerifiedEmployeeList = () => {
     });
   };
 
-  // Sorting logic
-  const sortedData = React.useMemo(() => {
-    if (!sortBy.field) return verifiedEmployee || [];
-
-    return [...verifiedEmployee].sort((a, b) => {
-      if (sortBy.field === "salary") {
-        return sortBy.order === "asc" ? a.salary - b.salary : b.salary - a.salary;
-      } else if (sortBy.field === "role") {
-        return sortBy.order === "asc"
-          ? a.role.localeCompare(b.role)
-          : b.role.localeCompare(a.role);
-      }
-      return 0;
-    });
-  }, [verifiedEmployee, sortBy]);
-
-  const data = React.useMemo(() => sortedData || [], [sortedData]);
+  const data = React.useMemo(() => verifiedEmployee || [], [verifiedEmployee]);
 
   const columns = React.useMemo(
     () => [
@@ -227,14 +208,6 @@ const AllVerifiedEmployeeList = () => {
     []
   );
 
-  const {
-    getTableProps,
-    getTableBodyProps,
-    headerGroups,
-    rows,
-    prepareRow,
-  } = useTable({ columns, data }, useSortBy); // Add useSortBy here
-
   return (
     <>
       <Helmet>
@@ -252,89 +225,83 @@ const AllVerifiedEmployeeList = () => {
           {isTableView ? "Switch to Card View" : "Switch to Table View"}
         </button>
 
-        {/* Sorting Buttons */}
-        <button
-          className="btn bg-[#578FCA] text-white hover:bg-[#578FCA] mb-4 mr-2"
-          onClick={() =>
-            setSortBy({
-              field: "salary",
-              order: sortBy.order === "asc" ? "desc" : "asc",
-            })
-          }
-        >
-          Sort by Salary {sortBy.field === "salary" ? (sortBy.order === "asc" ? "🔼" : "🔽") : ""}
-        </button>
-        <button
-          className="btn bg-[#578FCA] text-white hover:bg-[#578FCA] mb-4"
-          onClick={() =>
-            setSortBy({
-              field: "role",
-              order: sortBy.order === "asc" ? "desc" : "asc",
-            })
-          }
-        >
-          Sort by Role {sortBy.field === "role" ? (sortBy.order === "asc" ? "🔼" : "🔽") : ""}
-        </button>
-
         {/* Conditional Rendering */}
         {isTableView ? (
           <div className="overflow-auto max-h-[480px] border border-gray-200">
-            <table
-              className="table table-auto w-full border-collapse border border-gray-200"
-              {...getTableProps()}
-            >
+            <table className="table table-auto w-full border-collapse border border-gray-200">
               <thead>
-                {headerGroups.map((headerGroup) => {
-                  const { key, ...restProps } = headerGroup.getHeaderGroupProps();
-                  return (
-                    <tr key={key} {...restProps}>
-                      {headerGroup.headers.map((column) => {
-                        const { key, ...restColumnProps } = column.getHeaderProps(
-                          column.getSortByToggleProps() // Add sorting toggle props
-                        );
-                        return (
-                          <th
-                            key={key}
-                            {...restColumnProps}
-                            className="border border-gray-200 p-2 bg-gray-100 sticky top-0 z-10"
-                          >
-                            {column.render("Header")}
-                            {/* Add sorting indicator */}
-                            <span>
-                              {column.isSorted
-                                ? column.isSortedDesc
-                                  ? " 🔽"
-                                  : " 🔼"
-                                : ""}
-                            </span>
-                          </th>
-                        );
-                      })}
-                    </tr>
-                  );
-                })}
+                <tr>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Designation</th>
+                  <th>Bank Account</th>
+                  <th>Salary</th>
+                  <th>Adjust Salary</th>
+                  <th>Fire</th>
+                  <th>Make HR</th>
+                  <th>Details</th>
+                </tr>
               </thead>
-              <tbody {...getTableBodyProps()}>
-                {rows.map((row) => {
-                  prepareRow(row);
-                  const { key, ...restRowProps } = row.getRowProps();
-                  return (
-                    <tr key={key} {...restRowProps}>
-                      {row.cells.map((cell) => {
-                        const { key, ...restCellProps } = cell.getCellProps();
-                        return (
-                          <td
-                            key={key}
-                            {...restCellProps}
-                            className="border border-gray-200 p-2"
-                          >
-                            {cell.render("Cell")}
-                          </td>
-                        );
-                      })}
-                    </tr>
-                  );
-                })}
+              <tbody>
+                {data.map((employee) => (
+                  <tr key={employee._id}>
+                    <td>{employee.name}</td>
+                    <td>{employee.email}</td>
+                    <td>{employee.designation}</td>
+                    <td>{employee.bankAccountNo}</td>
+                    <td>{employee.salary}</td>
+                    <td>
+                      <button
+                        className="btn bg-[#578FCA] hover:bg-[#578FCA] text-sm"
+                        onClick={() => {
+                          handleAdjustSalary(employee.email);
+                        }}
+                      >
+                        Adjust Salary
+                      </button>
+                    </td>
+                    <td>
+                      <button
+                        className="btn btn-danger"
+                        onClick={() =>
+                          employee.role !== "admin" &&
+                          handleFiredEmployee(employee._id, employee.isFired)
+                        }
+                        disabled={employee.role === "admin"}
+                      >
+                        {employee.role === "admin"
+                          ? "Admin"
+                          : employee.isFired
+                          ? <p className="text-red-500">Fired</p>
+                          : "Fire"}
+                      </button>
+                    </td>
+                    <td>
+                      <button
+                        className="btn bg-[#A1E3F9] hover:bg-[#A1E3F9]"
+                        onClick={() =>
+                          employee.role !== "admin" &&
+                          handleChengeUserRole(employee._id, employee.role)
+                        }
+                        disabled={employee.role === "admin"}
+                      >
+                        {employee.role === "admin"
+                          ? "Admin"
+                          : employee.role === "HR"
+                          ? "Make Employee"
+                          : "Make HR"}
+                      </button>
+                    </td>
+                    <td>
+                      <Link
+                        to={`/dashboard/employee-details/${employee.email}`}
+                        className="btn bg-[#3674B5] hover:bg-[#3674B5]"
+                      >
+                        View Details
+                      </Link>
+                    </td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           </div>
@@ -348,7 +315,7 @@ const AllVerifiedEmployeeList = () => {
                 <p>Salary: {employee.salary}</p>
                 <div className="mt-4 flex gap-2">
                   <button
-                    className="btn bg-[#3674B5] hover:bg-[#3674B5]"
+                    className="btn bg-[#3674B5] hover:bg-[#3674B5] text-sm"
                     onClick={() => handleAdjustSalary(employee.email)}
                   >
                     Adjust Salary
