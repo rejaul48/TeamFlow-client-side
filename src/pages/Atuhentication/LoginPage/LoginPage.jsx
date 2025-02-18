@@ -14,6 +14,24 @@ const LoginPage = () => {
 
     const [password, setPassword] = useState('');
     const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+
+    const [email, setEmail] = useState('');
+    const [loginPassword, setLoginPassword] = useState('');
+
+    // handle all user loign'
+    const handleAnyoneLogin = (userType) => {
+        if (userType === 'employee') {
+            setEmail('rejaul.employee@gmail.com');
+            setLoginPassword('Rejaulislam48');
+        } else if (userType === 'hr') {
+            setEmail('rejaul.hr@gmail.com');
+            setLoginPassword('Rejaulislam48');
+        } else if (userType === 'admin') {
+            setEmail('rejaul.admin@gmail.com');
+            setLoginPassword('AdminPass48');
+        }
+    };
+
     const togglePasswordVisibility = () => {
         setIsPasswordVisible((prevState) => !prevState);
     };
@@ -96,6 +114,13 @@ const LoginPage = () => {
                 >
                     <h2 className='text-2xl lg:text-4xl font-bold text-center m2-4'>Welcome Back</h2>
 
+                    <div className='flex justify-end items-center gap-4 mt-4'>
+                        <button onClick={() => { handleAnyoneLogin('employee') }} className='uppercase px-6 bg-[#3674B5] py-3 font-semibold text-white'>Employee</button>
+                        <button onClick={() => { handleAnyoneLogin('hr') }} className='uppercase px-6 bg-[#578FCA] py-3 font-semibold text-white'>HR</button>
+                        <button onClick={() => { handleAnyoneLogin('admin') }} className='uppercase px-6 bg-[#fc5c65] py-3 font-semibold text-white'>Admin</button>
+                    </div>
+
+
                     <div className='mt-7'>
                         <form onSubmit={handleUserLogin}>
 
@@ -108,6 +133,7 @@ const LoginPage = () => {
                                     <input
                                         type="email"
                                         name='email'
+                                        value={email}
                                         required
                                         placeholder="Your email here.."
                                         className="input input-bordered w-full"
@@ -127,7 +153,7 @@ const LoginPage = () => {
                                             type={isPasswordVisible ? 'text' : 'password'}
                                             placeholder="Type password here.."
                                             className="input input-bordered w-full"
-                                            value={password}
+                                            value={loginPassword}
                                             onChange={(e) => setPassword(e.target.value)}
                                             required
                                         />
@@ -146,7 +172,7 @@ const LoginPage = () => {
                             <div className='mt-2'>
                                 <button
                                     type='submit'
-                                    className='btn w-full bg-pink-700 hover:bg-pink-900 text-xl text-white'>
+                                    className='btn w-full bg-[#578FCA] hover:bg-[#3674B5] text-xl text-white'>
                                     Log in
                                 </button>
                             </div>

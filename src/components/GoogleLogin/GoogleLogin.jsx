@@ -97,7 +97,7 @@ const GoogleLogin = () => {
         <>
             <Link
                 onClick={handleLoginWithGoogle}
-                className='flex items-center gap-1 btn bg-slate-800 text-white hover:bg-slate-700'
+                className='flex items-center gap-1 btn bg-[#3674B5] text-white hover:bg-[#578FCA]'
             >
                 <FaGoogle className='text-2xl' /> Log in with Google Account
             </Link>
