@@ -10,7 +10,7 @@ const ProfilePage = () => {
     return (
         <>
             <section>
-                <div className='grid grid-cols-1 md:grid-cols-12 gap-6 md:max-w-[98%]'>
+                <div className='grid grid-cols-1 md:grid-cols-12 gap-5 md:max-w-[98%] m-2'>
                     {/* Left Side: Profile Info */}
                     <div className='flex items-center gap-6 bg-white md:col-span-8 py-4 px-6 rounded-lg shadow-md'>
                         {/* User Image */}
@@ -30,7 +30,7 @@ const ProfilePage = () => {
                     </div>
 
                     {/* Right Side: Calendar */}
-                    <div className='md:col-span-4 bg-white p-4 rounded-lg shadow-md'>
+                    <div className='md:col-span-4 bg-white p-4 rounded-lg shadow-md mr-3'>
                         <h3 className="text-xl font-semibold mb-3">Todays a Date</h3>
                         <Calendar onChange={setDate} value={date} />
                         <p className='text-lg mt-2'>Todays Date: <strong>{date.toDateString()}</strong></p>

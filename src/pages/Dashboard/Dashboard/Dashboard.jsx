@@ -8,7 +8,7 @@ import ThemeToogleButton from '../../../components/ThemeToogleButton/ThemeToogle
 import Swal from 'sweetalert2';
 
 const Dashboard = () => {
-    const { user, currentUser, userLogOut, setCurrentUser, setUser } = useContext(TeamFlowContext);
+    const { user, currentUser, userLogOut, setCurrentUser, setUser,theme } = useContext(TeamFlowContext);
     const navigate = useNavigate();
     const [loading, setLoading] = useState(true);
 
@@ -174,14 +174,14 @@ const Dashboard = () => {
                     <section className='md:flex w-full h-screen'>
                         {/* Menu Section */}
                         <div className='bg-[#3674B5] md:min-h-screen md:w-3/12 lg:w-2/12'>
-                            <ul className="menu rounded-box w-56 text-white">{userRoleLinks}</ul>
+                            <ul className="menu rounded-box md:w-56  text-white">{userRoleLinks}</ul>
                         </div>
 
                         {/* Outlet Section */}
-                        <div className='w-full md:overflow-y-auto pb-12 h-fit md:h-full bg-[#D1F8EF]'>
-                            <section className='bg-[#578FCA]  px-4'>
+                        <div className={`w-full md:overflow-y-auto pb-12 h-fit md:h-full  ${theme === 'dark' ? 'bg-[#D1F8EF] bg-opacity-30': 'bg-[#D1F8EF]' }`}>
+                            <section className='px-4'>
                                 <div className='flex justify-between items-center py-2 '>
-                                    <div className='dropdown dropdown-end space-y-2 text-white'>
+                                    <div className='dropdown dropdown-end space-y-2 '>
                                         <h3 className='text-xl uppercase'>Welcome,</h3>
                                         <h2 className='text-xl md:text-3xl uppercase font-semibold'>{currentUser?.name}</h2>
                                     </div>

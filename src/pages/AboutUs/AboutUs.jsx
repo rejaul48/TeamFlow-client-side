@@ -1,33 +1,39 @@
 import React from 'react';
+import { Helmet } from 'react-helmet';
 
 const AboutUs = () => {
     return (
         <>
+
+            <Helmet>
+                <title>TemFlow | About us page</title>
+            </Helmet>
+
             <section className=''>
                 <div className="relative flex size-full min-h-screen flex-col bg-slate-50  group/design-root overflow-x-hidden" style={{ fontFamily: 'Inter, "Noto Sans", sans-serif' }}>
                     <div className="layout-container flex h-full grow flex-col">
-                       
+
                         <div className="container  w-full mx-auto   flex flex-1 justify-center py-5">
                             <div className="container flex flex-col mx-auto flex-1">
                                 <div className="@container">
                                     <div className="flex flex-col gap-6 px-4 py-10 @[480px]:gap-8 @[864px]:flex-row">
-                                         
-                                         <div className='flex items-center justify-center mt-12'>
+
+                                        <div className='flex items-center justify-center mt-12'>
                                             <img src="https://img.freepik.com/free-photo/close-up-young-colleagues-having-meeting_23-2149060234.jpg?t=st=1739903459~exp=1739907059~hmac=36ccdfbe428eecd6a21a636ac4c9cf9349776686d893cb7c22d07eedbc31f623&w=740" alt="about-us-image" />
-                                         </div>
+                                        </div>
 
                                         <div className="flex flex-col gap-6 @[480px]:min-w-[400px] @[480px]:gap-8 @[864px]:justify-center">
                                             <div className="flex flex-col gap-2 text-left">
                                                 <h1
                                                     className="text-[#0e141b] text-4xl font-black leading-tight tracking-[-0.033em] @[480px]:text-5xl @[480px]:font-black @[480px]:leading-tight @[480px]:tracking-[-0.033em]"
                                                 >
-                                                   TeamFlow
+                                                    TeamFlow
                                                 </h1>
                                                 <h2 className="text-[#0e141b] text-sm font-normal leading-normal @[480px]:text-base @[480px]:font-normal @[480px]:leading-normal tracking-wide">
-                                                This web application streamlines employee task submissions, HR workflow monitoring, and payments. Admins manage roles, verify employees, and process payments efficiently using Stripe for enhanced productivity and accountability.
+                                                    This web application streamlines employee task submissions, HR workflow monitoring, and payments. Admins manage roles, verify employees, and process payments efficiently using Stripe for enhanced productivity and accountability.
                                                 </h2>
                                             </div>
-                                           
+
                                         </div>
                                     </div>
                                 </div>
@@ -110,7 +116,7 @@ const AboutUs = () => {
                                             </div>
                                         </summary>
                                         <p className="text-[#4e7397] text-sm font-normal leading-normal pb-2">
-                                        Employees can log in to their accounts and submit tasks directly through the platform. They can provide details such as task descriptions, deadlines, and attachments. Once submitted, tasks are automatically routed to the relevant manager or HR for review and approval. The system also allows employees to track the status of their tasks in real-time.
+                                            Employees can log in to their accounts and submit tasks directly through the platform. They can provide details such as task descriptions, deadlines, and attachments. Once submitted, tasks are automatically routed to the relevant manager or HR for review and approval. The system also allows employees to track the status of their tasks in real-time.
                                         </p>
                                     </details>
                                     <details className="flex flex-col rounded-xl border border-[#d0dbe7] bg-slate-50 px-[15px] py-[7px] group">
@@ -123,7 +129,7 @@ const AboutUs = () => {
                                             </div>
                                         </summary>
                                         <p className="text-[#4e7397] text-sm font-normal leading-normal pb-2">
-                                        HR personnel have access to a centralized dashboard where they can view all ongoing tasks, employee progress, and pending approvals. The system provides real-time updates, notifications, and analytics to help HR monitor workflows efficiently. HR can also generate reports to assess productivity and identify bottlenecks.
+                                            HR personnel have access to a centralized dashboard where they can view all ongoing tasks, employee progress, and pending approvals. The system provides real-time updates, notifications, and analytics to help HR monitor workflows efficiently. HR can also generate reports to assess productivity and identify bottlenecks.
                                         </p>
                                     </details>
                                     <details className="flex flex-col rounded-xl border border-[#d0dbe7] bg-slate-50 px-[15px] py-[7px] group">
@@ -136,7 +142,7 @@ const AboutUs = () => {
                                             </div>
                                         </summary>
                                         <p className="text-[#4e7397] text-sm font-normal leading-normal pb-2">
-                                        Payments are processed securely using Stripe integration. Admins can review completed tasks, verify hours worked, and approve payments directly through the platform. Once approved, payments are automatically processed and disbursed to employees' accounts. The system also maintains a payment history for transparency and accountability.
+                                            Payments are processed securely using Stripe integration. Admins can review completed tasks, verify hours worked, and approve payments directly through the platform. Once approved, payments are automatically processed and disbursed to employees' accounts. The system also maintains a payment history for transparency and accountability.
                                         </p>
                                     </details>
                                     <details className="flex flex-col rounded-xl border border-[#d0dbe7] bg-slate-50 px-[15px] py-[7px] group">
@@ -149,7 +155,7 @@ const AboutUs = () => {
                                             </div>
                                         </summary>
                                         <p className="text-[#4e7397] text-sm font-normal leading-normal pb-2">
-                                        Admins have full control over employee roles and permissions. They can assign roles (e.g., employee, manager, HR) and define access levels for each role. Admins can also verify new employees during onboarding and update roles or permissions as needed. This ensures that only authorized personnel can access sensitive information or perform specific actions.
+                                            Admins have full control over employee roles and permissions. They can assign roles (e.g., employee, manager, HR) and define access levels for each role. Admins can also verify new employees during onboarding and update roles or permissions as needed. This ensures that only authorized personnel can access sensitive information or perform specific actions.
                                         </p>
                                     </details>
                                     <details className="flex flex-col rounded-xl border border-[#d0dbe7] bg-slate-50 px-[15px] py-[7px] group">
@@ -162,7 +168,7 @@ const AboutUs = () => {
                                             </div>
                                         </summary>
                                         <p className="text-[#4e7397] text-sm font-normal leading-normal pb-2">
-                                        Yes, your data is secure. We use industry-standard encryption protocols to protect all sensitive information. Additionally, role-based access control ensures that only authorized users can access specific data. Payment processing is handled securely through Stripe, which complies with PCI DSS standards for secure transactions.
+                                            Yes, your data is secure. We use industry-standard encryption protocols to protect all sensitive information. Additionally, role-based access control ensures that only authorized users can access specific data. Payment processing is handled securely through Stripe, which complies with PCI DSS standards for secure transactions.
                                         </p>
                                     </details>
                                 </div>
